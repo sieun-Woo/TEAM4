@@ -44,7 +44,7 @@ public class ProductController {
         isAsc : 오름차순(true)으로 정렬할 것인지 내림차순(false)으로 정렬할 것인지 구분
     */
     @GetMapping("/products")
-    public List<ProductResponseDto> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
+    public List<Product> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
                                       @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
 
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
