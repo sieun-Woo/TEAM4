@@ -13,8 +13,7 @@ public class SellerController {
 
     private final SellerProfileService sellerProfileService;
 
-    @PostMapping("/profile")
-    public SellerProfileResponseDto createSellerProfile(@RequestBody SellerProfileRequestDto sellerProfileRequestDto) {
-        return sellerProfileService.createSellerProfile(sellerProfileRequestDto);
-    }
+    // 판매자 프로필 조회만
+
+
 }
