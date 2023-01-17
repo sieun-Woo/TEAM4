@@ -15,4 +15,11 @@ public class CustomerProfileService {
         CustomerProfile customProfile = customerProfileRepository.saveAndFlush(new CustomerProfile(customerProfileRequestDto));
         return new CustomerProfileResponseDto(customProfile);
     }
+
+    public CustomerProfileResponseDto getProfileById(Long userId) {
+        CustomerProfile customerProfile = customerProfileRepository.findById(userId).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저가 없습니다.")
+        );
+        return new CustomerProfileResponseDto(customerProfile);
+    }
 }
