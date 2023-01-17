@@ -5,7 +5,6 @@ import com.sparta.shoppingmall.dto.ProductResponseDto;
 import com.sparta.shoppingmall.entity.Product;
 import com.sparta.shoppingmall.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +35,14 @@ public class ProductController {
         return productService.deleteProduct(productId);
     }
 
-    // 상품 목록 조회하기
+    /*
+        상품 목록 조회하기
+        @RequestParam을 통해 페이징에 대한 정보를 클라이언트로부터 받습니다.
+        page : 조회할 페이지
+        size : 한 페이지에 들어가는 조회 목록 크기
+        sortBy : 어떤 Column을 기준으로 정렬할 것인지 구분
+        isAsc : 오름차순(true)으로 정렬할 것인지 내림차순(false)으로 정렬할 것인지 구분
+    */
     @GetMapping("/products")
     public List<Product> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
                                       @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
