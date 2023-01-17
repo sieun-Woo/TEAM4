@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class SellerProfileResponseDto {
 
     private LocalDateTime createAt;
+
     private LocalDateTime modifiedAt;
 
     private Long id;

@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class ProductResponseDto {
 
     private LocalDateTime createAt;
+
     private LocalDateTime modifiedAt;
 
     private Long id;
@@ -19,6 +20,7 @@ public class ProductResponseDto {
     private String name;
 
     private int price;
+
 
     public ProductResponseDto(Product product) {
         this.createAt = product.getCreateAt();
