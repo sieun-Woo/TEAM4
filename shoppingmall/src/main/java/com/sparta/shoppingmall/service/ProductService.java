@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -54,16 +55,19 @@ public class ProductService {
 
     // 상품 조회하기
     @Transactional
-    public List<Product> readProducts(int page, int size, String sortBy, boolean isAsc) {
+    public List<ProductResponseDto> readProducts(int page, int size, String sortBy, boolean isAsc) {
         // 페이징 처리
         Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
         Sort sort = Sort.by(direction, sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        // 현재 프론트을 사용하고 있지 않기 때문에 페이징 처리한 정보들을 리스트 형식을 반환하였다.
+        // 페이징 처리한 정보들을 리스트 형식을 반환하였다.
         List<Product> products = productRepository.findAll(pageable).getContent();
-
-        return products;
+        List<ProductResponseDto> productResponseDtoList = new ArrayList<>();
+        for(int i = 0; i < products.size(); i++ ) {
+            productResponseDtoList.add(new ProductResponseDto(products.get(i)));
+        }
+        return productResponseDtoList;
     }
 
 }
