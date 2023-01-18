@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/TEAM4.iml" filepath="$PROJECT_DIR$/.idea/TEAM4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.sparta.shoppingmall.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.sparta.shoppingmall.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shoppingmall.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shoppingmall.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shoppingmall.test.iml" filepath="$PROJECT_DIR$/.idea/modules/shoppingmall.test.iml" />
     </modules>

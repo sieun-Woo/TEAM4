@@ -24,15 +24,7 @@ public class OrderProduct extends Timestamped {
     private int orderPrice;
     private int count;
 
-    public static OrderProduct createOrderProduct(Product product, int count) {
-
-        OrderProduct orderProduct = new OrderProduct();
-        orderProduct.setProduct(product);
-        orderProduct.setCount(count);
-        orderProduct.setOrderPrice(product.getPrice());
-
-        product.removeStock(count);
-        return orderProduct;
+    public OrderProduct() {
     }
 
     // 전체 금액
