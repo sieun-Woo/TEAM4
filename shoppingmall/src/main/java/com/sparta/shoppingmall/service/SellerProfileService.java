@@ -17,4 +17,9 @@ public class SellerProfileService {
         SellerProfile sellerProfile = sellerProfileRepository.save(new SellerProfile(sellerProfileRequestDto));
         return new SellerProfileResponseDto(sellerProfile);
     }
+
+    public SellerProfileResponseDto readMySellerProfile() {
+//        sellerProfileRepository.findById();
+        return null;
+    }
 }
