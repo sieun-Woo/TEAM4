@@ -1,5 +1,6 @@
 package com.sparta.shoppingmall.entity;
 
+import com.sparta.shoppingmall.dto.OrderRequestDto;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -24,7 +25,8 @@ public class OrderProduct extends Timestamped {
     private int orderPrice;
     private int count;
 
-    public OrderProduct() {
+    public OrderProduct(OrderRequestDto orderRequestDto) {
+        this.product
     }
 
     // 전체 금액
