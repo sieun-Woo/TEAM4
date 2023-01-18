@@ -3,10 +3,7 @@ package com.sparta.shoppingmall.controller;
 import com.sparta.shoppingmall.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -14,6 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class SellerController {
 
     private final SellerService sellerService;
+
+    @GetMapping("/orders")
+    public List<OrderResponseDto> readOrders(@RequestParam("page") int page, @RequestParam("size") int size,
+                                             @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
+        return sellerService.readOrders(page-1, size, sortBy, isAsc);
+    }
 
     // 고객의 주문 처리하기
     @PutMapping("/{orderId}")
