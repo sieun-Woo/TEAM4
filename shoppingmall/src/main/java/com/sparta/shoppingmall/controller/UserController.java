@@ -1,6 +1,9 @@
 package com.sparta.shoppingmall.controller;
 
+import com.sparta.shoppingmall.dto.SignInRequestDto;
+import com.sparta.shoppingmall.dto.SignUpRequestDto;
 import com.sparta.shoppingmall.entity.UserRoleEnum;
+import com.sparta.shoppingmall.jwt.JwtUtil;
 import com.sparta.shoppingmall.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.function.ServerResponse;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;

@@ -1,7 +1,9 @@
 package com.sparta.shoppingmall.dto;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.intellij.lang.annotations.Pattern;
 import org.springframework.lang.Nullable;
 
 @Getter
