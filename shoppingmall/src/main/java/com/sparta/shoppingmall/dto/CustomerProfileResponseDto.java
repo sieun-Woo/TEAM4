@@ -12,4 +12,8 @@ public class CustomerProfileResponseDto {
         this.nickname = customerProfile.getNickname();
         this.isImageExist = customerProfile.isImageExist();
     }
+
+    public static CustomerProfileResponseDto add(CustomerProfile customerProfile){
+        return new CustomerProfileResponseDto(customerProfile);
+    }
 }
