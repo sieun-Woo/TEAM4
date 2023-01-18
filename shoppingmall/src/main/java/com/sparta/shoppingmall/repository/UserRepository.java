@@ -1,5 +1,6 @@
 package com.sparta.shoppingmall.repository;
 
+import com.sparta.shoppingmall.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
