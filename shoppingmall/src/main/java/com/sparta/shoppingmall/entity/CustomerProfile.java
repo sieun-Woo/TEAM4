@@ -1,6 +1,7 @@
 package com.sparta.shoppingmall.entity;
 
 import com.sparta.shoppingmall.dto.CustomerProfileRequestDto;
+import com.sparta.shoppingmall.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +23,12 @@ public class CustomerProfile {
 
     public CustomerProfile(CustomerProfileRequestDto customerProfileRequestDto) {
         this.nickname = customerProfileRequestDto.getNickname();
+        this.isImageExist = customerProfileRequestDto.isImageExist();
+    }
+
+    // 수정 기능 구현 시
+    public void update(CustomerProfileRequestDto customerProfileRequestDto) {
+        this.nickname =customerProfileRequestDto.getNickname();
         this.isImageExist = customerProfileRequestDto.isImageExist();
     }
 }

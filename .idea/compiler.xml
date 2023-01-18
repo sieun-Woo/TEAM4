@@ -11,10 +11,5 @@
         <module name="shoppingmall.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="shoppingmall" target="17" />
-      <module name="shoppingmall.main" target="17" />
-      <module name="shoppingmall.test" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
