@@ -3,8 +3,10 @@ package com.sparta.shoppingmall.dto;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.intellij.lang.annotations.Pattern;
 import org.springframework.lang.Nullable;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Getter
 @AllArgsConstructor

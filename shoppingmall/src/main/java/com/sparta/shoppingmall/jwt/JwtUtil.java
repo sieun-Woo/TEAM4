@@ -1,5 +1,9 @@
 package com.sparta.shoppingmall.jwt;
 
+import com.sparta.shoppingmall.entity.UserRoleEnum;
+import com.sparta.shoppingmall.security.UserDetailsServiceImpl;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

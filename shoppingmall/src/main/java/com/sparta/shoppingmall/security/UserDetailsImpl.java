@@ -1,5 +1,7 @@
 package com.sparta.shoppingmall.security;
 
+import com.sparta.shoppingmall.entity.User;
+import com.sparta.shoppingmall.entity.UserRoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
