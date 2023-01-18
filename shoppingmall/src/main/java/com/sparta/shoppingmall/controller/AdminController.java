@@ -33,7 +33,7 @@ public class AdminController {
     //판매자 등록 승인
     @PutMapping("/admin/seller-registration/{authId}")
     public ResponseEntity<String> permitSellerRegister(@RequestBody SellerRegistrationDto sellerRegistrationDto){
-        adminServiceImpl.permitSellerRegister();
+        adminServiceImpl.permitSellerRegister(sellerRegistrationDto);
         return new ResponseEntity<>("판매자 등록이 승인되었습니다.", HttpStatus.OK);
     }
 
