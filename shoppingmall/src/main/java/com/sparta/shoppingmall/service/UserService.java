@@ -1,5 +1,7 @@
 package com.sparta.shoppingmall.service;
 
+import com.sparta.shoppingmall.jwt.JwtUtil;
+import com.sparta.shoppingmall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
