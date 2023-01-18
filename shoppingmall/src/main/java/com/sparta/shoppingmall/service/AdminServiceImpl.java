@@ -36,8 +36,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public ResponseEntity<String> permitSellerRegister(SellerRegistrationDto sellerRegistrationDto) {
-        return null;
+    public void permitSellerRegister(SellerRegistrationDto sellerRegistrationDto) {
+
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public ResponseEntity<String> deleteSellerRegistration(Long authId) {
+    public void deleteSellerRegistration(Long authId) {
         return null;
     }
 }
