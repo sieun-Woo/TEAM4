@@ -1,17 +1,28 @@
-package com.sparta.shoppingmall.admin.controller;
+package com.sparta.shoppingmall.controller;
 
+import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
+import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
+import com.sparta.shoppingmall.dto.SellerRegistrationDto;
+import com.sparta.shoppingmall.service.AdminService;
+import com.sparta.shoppingmall.service.AdminServiceImpl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 public class AdminController {
+
+    private final AdminServiceImpl adminServiceImpl;
 
     //판매자 등록 요청 조회
     @GetMapping("/admin/seller-registrations")
@@ -28,14 +39,14 @@ public class AdminController {
 
     //고객 목록 조회`
     @GetMapping("/admin/customers")
-    public List<ResponseCustomerDto> getCustomerList(){
-        return adminServiceImpl.getCustomerList();
+    public ResponseEntity<List<CustomerProfileResponseDto>> getCustomerList(){
+        List<CustomerProfileResponseDto> data = adminServiceImpl.getCustomerList();
+        return ResponseEntity.status(200).body(data);
     }
-
 
     //판매자 목록 조회
     @GetMapping("/admin/sellers")
-    public List<ResponseSellerDto> getSellerList() {
+    public List<SellerProfileResponseDto> getSellerList() {
         return adminServiceImpl.getSellerList();
     }
 
