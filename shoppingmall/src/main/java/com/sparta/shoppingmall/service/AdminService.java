@@ -14,10 +14,10 @@ public interface AdminService {
 
     List<SellerRegistrationDto> getSellerRegistrationList(); //판매자 등록 요청 조회
 
-    ResponseEntity<String> permitSellerRegister(SellerRegistrationDto sellerRegistrationDto);
+    void permitSellerRegister(SellerRegistrationDto sellerRegistrationDto);
     //판매자 권한 허가
 
     List<SellerProfileResponseDto> getSellerList(); //판매자 목록 조회
 
-    ResponseEntity<String> deleteSellerRegistration(Long authId); //판매자 권한 삭제
+    void deleteSellerRegistration(Long authId); //판매자 권한 삭제
 }
