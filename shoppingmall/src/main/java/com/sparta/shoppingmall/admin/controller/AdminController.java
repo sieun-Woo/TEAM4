@@ -26,7 +26,7 @@ public class AdminController {
         return new ResponseEntity<>("판매자 등록이 승인되었습니다.", HttpStatus.OK);
     }
 
-    //고객 목록 조회
+    //고객 목록 조회`
     @GetMapping("/admin/customers")
     public List<ResponseCustomerDto> getCustomerList(){
         return adminServiceImpl.getCustomerList();
