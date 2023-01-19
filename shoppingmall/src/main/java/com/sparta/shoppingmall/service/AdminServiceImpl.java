@@ -1,10 +1,10 @@
 package com.sparta.shoppingmall.service;
 
-import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
+import com.sparta.shoppingmall.dto.CustomerResponseDto;
 import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
 import com.sparta.shoppingmall.dto.SellerRegistrationDto;
-import com.sparta.shoppingmall.entity.CustomerProfile;
-import com.sparta.shoppingmall.repository.CustomerProfileRepository;
+import com.sparta.shoppingmall.entity.Customer;
+import com.sparta.shoppingmall.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,14 @@ import java.util.List;
 @Slf4j
 public class AdminServiceImpl implements AdminService {
 
-    private final CustomerProfileRepository customerProfileRepository;
+    private final CustomerRepository customerRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public List<CustomerProfileResponseDto> getCustomerList() {
-        List<CustomerProfile> customerList = customerProfileRepository.findAll();
-        List<CustomerProfileResponseDto> resultDto = new ArrayList<>();
-        customerList.forEach(customer -> resultDto.add(CustomerProfileResponseDto.add(customer)));
+    public List<CustomerResponseDto> getCustomerList() {
+        List<Customer> customerList = customerRepository.findAll();
+        List<CustomerResponseDto> resultDto = new ArrayList<>();
+        customerList.forEach(customer -> resultDto.add(CustomerResponseDto.add(customer)));
         return resultDto;
     }
 
