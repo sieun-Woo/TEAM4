@@ -2,12 +2,10 @@ package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
 import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
-import com.sparta.shoppingmall.dto.SellerRegistrationDto;
 import com.sparta.shoppingmall.entity.CustomerProfile;
 import com.sparta.shoppingmall.repository.CustomerProfileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

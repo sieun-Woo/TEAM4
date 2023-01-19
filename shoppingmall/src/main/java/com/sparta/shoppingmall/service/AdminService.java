@@ -2,10 +2,6 @@ package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
 import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
-import com.sparta.shoppingmall.dto.SellerRegistrationDto;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
