@@ -21,6 +21,10 @@ public class Product extends Timestamped {
     @Column
     private int price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ORDER_ID", nullable = false)
+    private Order order;
+
     public Product(ProductRequestDto productRequestDto) {
         this.name = productRequestDto.getName();
         this.price = productRequestDto.getPrice();

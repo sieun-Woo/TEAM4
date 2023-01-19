@@ -1,9 +1,11 @@
 package com.sparta.shoppingmall.entity;
 
+import com.sparta.shoppingmall.dto.OrderRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.beans.PropertyDescriptor;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,55 +22,54 @@ public class Order extends Timestamped{
     @Column(name = "orderId")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @ManyToOne
+    @JoinColumn(name ="userId")
     private User user;
 
-   // private LocalDateTime orderDate; //주문일
+    @OneToMany(mappedBy ="order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Product> orderProducts = new ArrayList<>();
 
     @Column
-    private boolean orderStatus; //주문상태
+    private int price;
+    @Column
+    private String requireComment; // 요구 사항
+    @Column
+    private String addressee; // 수령인
+    @Column
+    private String address; // 주소
+    @Column
+    private String phone; // 연락처
 
-    // order_product 테이블의 order 필드에 매핑
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<OrderProduct> orderProducts = new ArrayList<>();
+    @Column
+    private boolean orderStatus; // 주문 상태
 
 
-    public Order(User user) {
-        this.user = user;
-        for (OrderProduct orderProduct : orderProducts) {
+    public Order(User user,OrderRequestDto orderRequestDto) {
+        List<Product> orderProducts = new ArrayList<>();
+        for (Product orderProduct : orderProducts) {
             orderProducts.add(orderProduct);
         }
+        this.user = user;
+        this.orderProducts = orderProducts;
+        this.price = getTotalPrice(orderProducts);
+        this.requireComment = orderRequestDto.getRequireComment();
+        this.addressee = orderRequestDto.getAddressee();
+        this.address = orderRequestDto.getAddress();
+        this.phone = orderRequestDto.getPhone();
+        this.orderStatus =false;
     }
 
-    /*public Order createOrder(Member member, List<OrderProduct> orderProductList) {
 
-        Order order = new Order();
-        order.setMember(member);
-        for (OrderProduct orderProduct : orderProductList) {
-            orderProducts.add(orderProduct);
-        }
-        order.setOrderDate(LocalDateTime.now());
-        order.setOrderStatus(OrderStatus.ORDER);
-        return order;
-    }*/
 
-    public int getTotalPrice() {
+    public int getTotalPrice(List<Product> orderProducts) {
         int totalPrice = 0;
 
-        for (OrderProduct orderProduct : orderProducts) {
-            totalPrice += orderProduct.getTotalPrice();
+        for (Product orderProduct : orderProducts) {
+            totalPrice += orderProduct.getPrice();
         }
         return totalPrice;
     }
 
-   /* public void orderCancel() {
-
-        this.orderStatus = OrderStatus.CANCEL;
-        for (OrderProduct orderProduct : orderProducts) {
-            orderProduct.cancel();
-        }
-    }*/
 
 
 }
