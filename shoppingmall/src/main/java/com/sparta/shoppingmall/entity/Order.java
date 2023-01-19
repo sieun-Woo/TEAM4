@@ -44,6 +44,7 @@ public class Order extends Timestamped{
     private boolean orderStatus; // 주문 상태
 
 
+
     public Order(User user,OrderRequestDto orderRequestDto) {
         List<Product> orderProducts = new ArrayList<>();
         for (Product orderProduct : orderProducts) {
@@ -71,5 +72,7 @@ public class Order extends Timestamped{
     }
 
 
-
+    public void setOrderState() {
+        this.orderStatus = true;
+    }
 }
