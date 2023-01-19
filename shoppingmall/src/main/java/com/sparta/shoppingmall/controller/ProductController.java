@@ -2,7 +2,6 @@ package com.sparta.shoppingmall.controller;
 
 import com.sparta.shoppingmall.dto.ProductRequestDto;
 import com.sparta.shoppingmall.dto.ProductResponseDto;
-import com.sparta.shoppingmall.entity.Product;
 import com.sparta.shoppingmall.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -51,9 +50,4 @@ public class ProductController {
         return productService.readProducts(page-1, size, sortBy, isAsc);
     }
 
-    // 고객의 요청 처리하기
-    @PutMapping("/{orderId}")
-    public ResponseEntity  approveCustomerOrder(@PathVariable Long orderId) {
-        return null;
-    }
 }

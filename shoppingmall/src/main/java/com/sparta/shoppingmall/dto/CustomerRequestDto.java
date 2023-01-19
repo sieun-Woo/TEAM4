@@ -3,7 +3,7 @@ package com.sparta.shoppingmall.dto;
 import lombok.Getter;
 
 @Getter
-public class CustomerProfileRequestDto {
+public class CustomerRequestDto {
     private String nickname;
     private boolean isImageExist;
 }

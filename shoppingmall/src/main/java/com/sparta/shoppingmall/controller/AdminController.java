@@ -1,6 +1,6 @@
 package com.sparta.shoppingmall.controller;
 
-import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
+import com.sparta.shoppingmall.dto.CustomerResponseDto;
 import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
 import com.sparta.shoppingmall.service.AdminServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +35,8 @@ public class AdminController {
 
     //고객 목록 조회`
     @GetMapping("/admin/customers")
-    public ResponseEntity<List<CustomerProfileResponseDto>> getCustomerList(){
-        List<CustomerProfileResponseDto> data = adminServiceImpl.getCustomerList();
+    public ResponseEntity<List<CustomerResponseDto>> getCustomerList(){
+        List<CustomerResponseDto> data = adminServiceImpl.getCustomerList();
         return ResponseEntity.status(200).body(data);
     }
 

@@ -6,6 +6,7 @@ import com.sparta.shoppingmall.entity.CustomerProfile;
 import com.sparta.shoppingmall.repository.CustomerProfileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +35,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void permitSellerRegister(SellerRegistrationDto sellerRegistrationDto) {
-
+    public ResponseEntity<String> permitSellerRegister(SellerRegistrationDto sellerRegistrationDto) {
+        return null;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteSellerRegistration(Long authId) {
+    public ResponseEntity<String> deleteSellerRegistration(Long authId) {
         return null;
     }
 }
