@@ -24,7 +24,7 @@ public class SellerService {
     private final OrderRepository orderRepository;
     public ResponseEntity<String> approveCustomerOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("해당하는 주문이 없습니다."));
-        order.setOrderState();
+        order.setOrderStatus();
         // 수정 이후에 flush 하여 DB에 반영하였다.
         orderRepository.flush();
 

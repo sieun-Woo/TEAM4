@@ -1,11 +1,16 @@
 package com.sparta.shoppingmall.controller;
 
-import com.sparta.shoppingmall.dto.*;
-import com.sparta.shoppingmall.entity.SellerProfile;
+import com.sparta.shoppingmall.dto.CustomerRequestDto;
+import com.sparta.shoppingmall.dto.CustomerResponseDto;
+import com.sparta.shoppingmall.dto.RegistrationRequestDto;
+import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.service.CustomerService;
+import com.sparta.shoppingmall.service.RegistrationService;
 import com.sparta.shoppingmall.service.ProductService;
 import com.sparta.shoppingmall.service.SellerProfileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +22,8 @@ public class CustomerController {
     private final CustomerService customerService;
     private final SellerProfileService sellerProfileService;
     private final ProductService productService;
+    private final RegistrationService registrationService;
+
     // 구매자 프로필 설정
     @PostMapping("/customer/profile")
     public CustomerResponseDto createCustomer(@RequestBody CustomerRequestDto customerRequestDto){
@@ -30,8 +37,9 @@ public class CustomerController {
 
     // 판매자 등록(판매자 프로필 설정)
     @PostMapping("/customer/registration")
-    public SellerProfileResponseDto createSellerProfile(@RequestBody SellerProfileRequestDto sellerProfileRequestDto) {
-        return sellerProfileService.createSellerProfile(sellerProfileRequestDto);
+    public RegistrationResponseDto createSellerProfile(@RequestBody RegistrationRequestDto registrationRequestDto,
+                                                       @AuthenticationPrincipal UserDetails userDetails) {
+        return registrationService.createRegistration(registrationRequestDto, userDetails);
     }
 
     @GetMapping("/sellers")
@@ -54,5 +62,5 @@ public class CustomerController {
     public List<ProductResponseDto> allProducts(Pageable pageable){
         return productService.findAll(pageable).get;
     }
-  
+
 }

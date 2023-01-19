@@ -1,7 +1,7 @@
 package com.sparta.shoppingmall.controller;
 
 import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
-import com.sparta.shoppingmall.service.SellerProfileService;
+import com.sparta.shoppingmall.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/seller/")
 public class SellerProfileController {
 
-    private final SellerProfileService sellerProfileService;
+    private final RegistrationService registrationService;
 
     // 판매자 프로필 조회만
     @GetMapping("/profile")
     public SellerProfileResponseDto readSellerProfile() {
-        return sellerProfileService.readMySellerProfile();
+        return registrationService.readMySellerProfile();
     }
 
 
