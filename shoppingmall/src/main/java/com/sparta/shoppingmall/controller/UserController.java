@@ -41,7 +41,7 @@ public class UserController {
         }
 
         //사용자 role 확인
-        UserRoleEnum role = UserRoleEnum.USER;
+        UserRoleEnum role = UserRoleEnum.CUSTOMER;
         if (signUpRequestDto.isAdmin()) {
             assert signUpRequestDto.getAdminPassword() != null;
             if (!signUpRequestDto.getAdminPassword().equals(ADMIN_PASSWORD)) {

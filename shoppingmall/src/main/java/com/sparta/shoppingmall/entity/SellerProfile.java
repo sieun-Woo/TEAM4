@@ -21,12 +21,8 @@ public class SellerProfile extends Timestamped{
     @Column
     private String introduce;
 
-    @Column
-    private String category;
-
     public SellerProfile (SellerProfileRequestDto sellerProfileRequestDto) {
         this.nickname = sellerProfileRequestDto.getNickname();
         this.introduce = sellerProfileRequestDto.getIntroduce();
-        this.category = sellerProfileRequestDto.getCategory();
     }
 }
