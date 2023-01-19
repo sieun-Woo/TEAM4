@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.beans.PropertyDescriptor;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +37,12 @@ public class Order extends Timestamped{
     private String address; // 주소
     @Column
     private String phone; // 연락처
-
     @Column
     private boolean orderStatus; // 주문 상태
+
+    public void setOrderStatus() {
+        this.orderStatus = true;
+    }
 
 
     public Order(User user,OrderRequestDto orderRequestDto) {

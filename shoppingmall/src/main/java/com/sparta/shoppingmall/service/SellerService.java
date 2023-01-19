@@ -1,7 +1,8 @@
 package com.sparta.shoppingmall.service;
 
-import com.sparta.shoppingmall.dto.ProductResponseDto;
-import com.sparta.shoppingmall.entity.Product;
+import com.sparta.shoppingmall.dto.OrderResponseDto;
+import com.sparta.shoppingmall.entity.Order;
+import com.sparta.shoppingmall.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -19,8 +21,8 @@ public class SellerService {
 
     private final OrderRepository orderRepository;
     public ResponseEntity<String> approveCustomerOrder(Long orderId) {
-        Order order = orderRepository.findById(ordertId).orElseThrow(() -> new IllegalArgumentException("해당하는 주문이 없습니다."));
-        order.setOrderState(true);
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("해당하는 주문이 없습니다."));
+        order.setOrderStatus();
         // 수정 이후에 flush 하여 DB에 반영하였다.
         orderRepository.flush();
 

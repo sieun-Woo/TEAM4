@@ -1,9 +1,12 @@
 package com.sparta.shoppingmall.controller;
 
+import com.sparta.shoppingmall.dto.OrderResponseDto;
 import com.sparta.shoppingmall.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
