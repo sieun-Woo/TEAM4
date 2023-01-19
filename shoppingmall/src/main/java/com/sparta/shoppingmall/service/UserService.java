@@ -1,5 +1,9 @@
 package com.sparta.shoppingmall.service;
 
+import com.sparta.shoppingmall.dto.SignInRequestDto;
+import com.sparta.shoppingmall.dto.SignUpRequestDto;
+import com.sparta.shoppingmall.entity.User;
+import com.sparta.shoppingmall.entity.UserRoleEnum;
 import com.sparta.shoppingmall.jwt.JwtUtil;
 import com.sparta.shoppingmall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

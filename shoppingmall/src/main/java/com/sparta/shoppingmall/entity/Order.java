@@ -73,7 +73,5 @@ public class Order extends Timestamped{
     }
 
 
-    public void setOrderState() {
-        this.orderStatus = true;
-    }
+
 }

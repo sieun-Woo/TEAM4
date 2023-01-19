@@ -4,11 +4,11 @@ import com.sparta.shoppingmall.dto.*;
 import com.sparta.shoppingmall.service.CustomerService;
 import com.sparta.shoppingmall.service.RegistrationService;
 import com.sparta.shoppingmall.service.ProductService;
-import com.sparta.shoppingmall.service.SellerProfileService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
