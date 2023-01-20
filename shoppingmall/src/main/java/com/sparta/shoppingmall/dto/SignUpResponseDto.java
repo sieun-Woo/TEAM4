@@ -1,5 +1,8 @@
 package com.sparta.shoppingmall.dto;
 
+import lombok.Getter;
+
+@Getter
 public class SignUpResponseDto {
     private final String statusCode;
     private final String message;

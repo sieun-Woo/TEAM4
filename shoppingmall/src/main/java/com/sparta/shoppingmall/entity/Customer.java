@@ -15,7 +15,7 @@ public class Customer extends User{
 
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String nickname;
     @Column
     private boolean isImageExist;
