@@ -15,6 +15,10 @@ public class Product extends Timestamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="userId")
+    User user;
+
     @Column
     private String name;
 
