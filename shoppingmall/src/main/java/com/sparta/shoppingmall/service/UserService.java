@@ -2,7 +2,7 @@ package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.SignInRequestDto;
 import com.sparta.shoppingmall.dto.SignUpRequestDto;
-import com.sparta.shoppingmall.dto.SignupResponseDto;
+import com.sparta.shoppingmall.dto.SignUpResponseDto;
 import com.sparta.shoppingmall.entity.User;
 import com.sparta.shoppingmall.entity.UserRoleEnum;
 import com.sparta.shoppingmall.exception.CustomException;
@@ -22,7 +22,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
 
     @Transactional
-    public SignupResponseDto signUp(SignUpRequestDto signupRequestDto, UserRoleEnum role) {
+    public SignUpResponseDto signUp(SignUpRequestDto signupRequestDto, UserRoleEnum role) {
 
         // 회원 중복 확인
         Optional<User> findUserId = userRepository.findByUsername(signupRequestDto.getUsername());
@@ -31,7 +31,7 @@ public class UserService {
         }
         User user = new User(signupRequestDto.getUsername(), signupRequestDto.getPassword(), role);
         userRepository.save(user);
-        return new SignupResponseDto("200","회원가입 성공!");
+        return new SignUpResponseDto("200","회원가입 성공!");
     }
 
 

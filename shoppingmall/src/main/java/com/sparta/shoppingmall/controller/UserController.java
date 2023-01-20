@@ -3,7 +3,7 @@ package com.sparta.shoppingmall.controller;
 import com.sparta.shoppingmall.dto.SignInRequestDto;
 import com.sparta.shoppingmall.dto.SignInResponseDto;
 import com.sparta.shoppingmall.dto.SignUpRequestDto;
-import com.sparta.shoppingmall.dto.SignupResponseDto;
+import com.sparta.shoppingmall.dto.SignUpResponseDto;
 import com.sparta.shoppingmall.entity.UserRoleEnum;
 import com.sparta.shoppingmall.exception.CustomException;
 import com.sparta.shoppingmall.exception.ErrorCode;
@@ -31,12 +31,12 @@ public class UserController {
     private static final String ADMIN_PASSWORD = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
     @PostMapping("/sign-up")
-    public SignupResponseDto signUp(@RequestBody @Valid SignUpRequestDto signUpRequestDto, BindingResult bindingResult) {
+    public SignUpResponseDto signUp(@RequestBody @Valid SignUpRequestDto signUpRequestDto, BindingResult bindingResult) {
         // 전달 받은 아이디와 패스워드가 요구되는 패턴과 일치하지 않는 경우 예외처리
         if (bindingResult.hasErrors() && bindingResult.getAllErrors().stream().findFirst().isPresent()) {
             ObjectError objectError = bindingResult.getAllErrors().stream().findFirst().get();
             String errorCode = Objects.requireNonNull(objectError.getCodes())[1].split("\\.")[1];
-            System.out.println("Signup Pattern Error:" + errorCode);
+            System.out.println("SignUp Pattern Error:" + errorCode);
             if (errorCode.equals("username")) {
                 throw new CustomException(ErrorCode.ID_NOT_FOUND);
             } else if (errorCode.equals("password")) {

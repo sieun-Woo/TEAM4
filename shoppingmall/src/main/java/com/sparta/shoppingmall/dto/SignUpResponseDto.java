@@ -1,10 +1,10 @@
 package com.sparta.shoppingmall.dto;
 
-public class SignupResponseDto {
+public class SignUpResponseDto {
     private final String statusCode;
     private final String message;
 
-    public SignupResponseDto(String statusCode, String message) {
+    public SignUpResponseDto(String statusCode, String message) {
         this.statusCode = statusCode;
         this.message = message;
     }
