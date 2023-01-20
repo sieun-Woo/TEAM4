@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class RegistrationService {
@@ -20,9 +22,16 @@ public class RegistrationService {
 
     public ResponseEntity<String> createRegistration(RegistrationRequestDto registrationRequestDto, UserDetails userDetails) {
 
-         User user = userRepository.findByUsername(userDetails.getUsername()).get();
+        User user = userRepository.findByUsername(userDetails.getUsername()).get();
 
-        registrationRepository.save(new Registration(registrationRequestDto,user.getId()));
+        Optional<Registration> registration = registrationRepository.findByUserId(user.getId());
+
+        // 판매자 등록 한 번만
+        if (registration.isPresent()) {
+            throw new IllegalArgumentException("이미 요청하셨습니다.");
+        }
+        
+        registrationRepository.saveAndFlush(new Registration(registrationRequestDto, user.getId()));
 
         return new ResponseEntity<>("판매자 등록이 요청되었습니다.", HttpStatus.OK);
     }

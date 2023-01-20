@@ -39,7 +39,7 @@ public class CustomerController {
         return registrationService.createRegistration(registrationRequestDto, userDetails);
     }
 
-    @GetMapping("/sellers")
+    @GetMapping("/customer/sellers")
     public List<RegistrationResponseDto> readSellers(@RequestParam("page") int page, @RequestParam("size") int size,
                                                       @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
 
@@ -55,10 +55,5 @@ public class CustomerController {
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
         return productService.readProducts(page-1, size, sortBy, isAsc, userDetails);
     }
-
-    /*@GetMapping("/sellers")
-    public List<ProductResponseDto> allProducts(Pageable pageable){
-        return productService.findAll(pageable).get;
-    }*/
 
 }
