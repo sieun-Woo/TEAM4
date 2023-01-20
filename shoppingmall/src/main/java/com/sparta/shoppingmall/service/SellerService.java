@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +29,8 @@ public class SellerService {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final RegistrationRepository registrationRepository;
+
+    @Transactional
     public ResponseEntity<String> approveCustomerOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("해당하는 주문이 없습니다."));
         order.setOrderStatus();
@@ -39,6 +42,7 @@ public class SellerService {
     }
 
     // 고객요청(주문) 목록 조회
+    @Transactional
     public List<OrderResponseDto> readOrders(int page, int size, String sortBy, boolean isAsc) {
         // 페이징 처리
         Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
@@ -56,6 +60,7 @@ public class SellerService {
     }
 
     // 나의 판매자 프로필 조회
+    @Transactional
     public RegistrationResponseDto readSellerProfile(UserDetails userDetails) {
         String username = userDetails.getUsername();
         User user = userRepository.findByUsername(username).get();
