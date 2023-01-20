@@ -15,11 +15,19 @@ public class Product extends Timestamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="userId")
+    User user;
+
     @Column
     private String name;
 
     @Column
     private int price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ORDER_ID", nullable = false)
+    private Order order;
 
     public Product(ProductRequestDto productRequestDto) {
         this.name = productRequestDto.getName();
@@ -30,7 +38,5 @@ public class Product extends Timestamped {
         this.name = productRequestDto.getName();
         this.price = productRequestDto.getPrice();
     }
-
-
 
 }

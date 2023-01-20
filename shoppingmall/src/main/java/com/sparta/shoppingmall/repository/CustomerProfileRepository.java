@@ -1,7 +1,17 @@
 package com.sparta.shoppingmall.repository;
 
-import com.sparta.shoppingmall.entity.CustomerProfile;
+import com.sparta.shoppingmall.entity.Customer;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerProfileRepository extends JpaRepository<CustomerProfile, Long> {
+import java.util.Optional;
+
+public interface CustomerProfileRepository extends JpaRepository<Customer, Long> {
+
+    Optional<Customer> findById(Long id);
+
+    Optional<Customer> findByNickname(String nickname);
+
+    Optional<Customer> findByUsername(String username);
+
 }

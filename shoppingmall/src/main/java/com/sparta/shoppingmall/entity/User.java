@@ -33,8 +33,12 @@ public class User {
         this.role = role;
     }
 
-    public void modifyUserStatus(boolean userStatus) {
-        isUserStatus = userStatus;
+    public void sellerToCustomer() {
+        this.role = UserRoleEnum.CUSTOMER;
+    }
+
+    public void customerToSeller() {
+        this.role = UserRoleEnum.SELLER;
     }
 }
 

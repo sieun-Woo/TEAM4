@@ -1,17 +1,14 @@
 package com.sparta.shoppingmall.controller;
 
 import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
-import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
-import com.sparta.shoppingmall.dto.SellerRegistrationDto;
-import com.sparta.shoppingmall.service.AdminService;
+import com.sparta.shoppingmall.dto.RegistrationRequestDto;
+import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.service.AdminServiceImpl;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,14 +23,14 @@ public class AdminController {
 
     //판매자 등록 요청 조회
     @GetMapping("/admin/seller-registrations")
-    public List<SellerRegistrationDto> getSellerRegistrationList() {
+    public List<RegistrationResponseDto> getSellerRegistrationList() {
         return adminServiceImpl.getSellerRegistrationList();
     }
 
     //판매자 등록 승인
     @PutMapping("/admin/seller-registration/{authId}")
-    public ResponseEntity<String> permitSellerRegister(@RequestBody SellerRegistrationDto sellerRegistrationDto){
-        adminServiceImpl.permitSellerRegister();
+    public ResponseEntity<String> permitSellerRegister(@RequestBody RegistrationRequestDto registrationRequestDto, @PathVariable Long authId){
+        adminServiceImpl.permitSellerRegister(registrationRequestDto, authId);
         return new ResponseEntity<>("판매자 등록이 승인되었습니다.", HttpStatus.OK);
     }
 
@@ -46,7 +43,7 @@ public class AdminController {
 
     //판매자 목록 조회
     @GetMapping("/admin/sellers")
-    public List<SellerProfileResponseDto> getSellerList() {
+    public List<RegistrationResponseDto> getSellerList() {
         return adminServiceImpl.getSellerList();
     }
 

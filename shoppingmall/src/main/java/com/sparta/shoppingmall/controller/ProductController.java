@@ -2,10 +2,11 @@ package com.sparta.shoppingmall.controller;
 
 import com.sparta.shoppingmall.dto.ProductRequestDto;
 import com.sparta.shoppingmall.dto.ProductResponseDto;
-import com.sparta.shoppingmall.entity.Product;
 import com.sparta.shoppingmall.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/seller/")
+@PreAuthorize("hasAnyRole('ROLE_SELLER')")
 public class ProductController {
 
     private final ProductService productService;
@@ -36,7 +38,7 @@ public class ProductController {
     }
 
     /*
-        상품 목록 조회하기
+        나의 판매 상품 목록 조회하기
         @RequestParam을 통해 페이징에 대한 정보를 클라이언트로부터 받습니다.
         page : 조회할 페이지
         size : 한 페이지에 들어가는 조회 목록 크기
@@ -45,15 +47,11 @@ public class ProductController {
     */
     @GetMapping("/products")
     public List<ProductResponseDto> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
-                                      @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
+                                                 @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc,
+                                                 UserDetails userDetails) {
 
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
-        return productService.readProducts(page-1, size, sortBy, isAsc);
+        return productService.readProducts(page-1, size, sortBy, isAsc, userDetails);
     }
 
-    // 고객의 요청 처리하기
-    @PutMapping("/{orderId}")
-    public ResponseEntity  approveCustomerOrder(@PathVariable Long orderId) {
-        return null;
-    }
 }
