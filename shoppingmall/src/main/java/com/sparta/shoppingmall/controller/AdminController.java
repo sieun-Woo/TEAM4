@@ -48,7 +48,7 @@ public class AdminController {
     }
 
     //판매자 권한 삭제
-    @PutMapping("/admin/seller-registration/{authId}")
+    @PutMapping("/admin/seller-degrade/{authId}")
     public ResponseEntity<String> deleteSellerRegistration(@PathVariable Long authId){
         adminServiceImpl.deleteSellerRegistration(authId);
         return new ResponseEntity<>("판매자 권한 삭제 완료", HttpStatus.OK);
