@@ -59,7 +59,7 @@ public class ProductService {
     // 상품 수정하기
     public ProductResponseDto updateProduct(Long productId, ProductRequestDto productRequestDto) {
         // 등록된 id가 없다면 예외가 발생한다.
-        Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException());
+        Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("수정할 수 없습니다."));
         product.update(productRequestDto);
         // 수정 이후에 flush 하여 DB에 반영하였다.
         productRepository.flush();
@@ -71,7 +71,7 @@ public class ProductService {
     @Transactional
     public ResponseEntity<String> deleteProduct(Long productId) {
         // 등록된 id가 없다면 예외가 발생한다.
-        productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException());
+        productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("삭제할 수 없습니다."));
         productRepository.deleteById(productId);
         return new ResponseEntity("상품이 삭제 되었습니다.", HttpStatus.OK);
     }

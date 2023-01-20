@@ -24,7 +24,7 @@ public class Order extends Timestamped{
     @JoinColumn(name ="userId")
     private User user;
 
-    @OneToMany(mappedBy ="order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy ="order", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Product> orderProducts = new ArrayList<>();
 
     @Column

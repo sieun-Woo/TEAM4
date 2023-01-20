@@ -2,13 +2,13 @@ package com.sparta.shoppingmall.dto;
 
 import com.sparta.shoppingmall.entity.Product;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 
 @Getter
+@NoArgsConstructor
 public class ProductResponseDto {
 
     private LocalDateTime createAt;
