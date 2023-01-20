@@ -2,12 +2,12 @@ package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.CustomerRequestDto;
 import com.sparta.shoppingmall.dto.CustomerResponseDto;
-import com.sparta.shoppingmall.dto.OrderResponseDto;
+
 import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
 import com.sparta.shoppingmall.entity.Customer;
-import com.sparta.shoppingmall.entity.Order;
+
 import com.sparta.shoppingmall.entity.SellerProfile;
-import com.sparta.shoppingmall.repository.CustomerRepository;
+import com.sparta.shoppingmall.repository.CustomerProfileRepository;
 import com.sparta.shoppingmall.repository.SellerProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -22,16 +22,16 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
-    private final CustomerRepository customerRepository;
+    private final CustomerProfileRepository customerProfileRepository;
     private final SellerProfileRepository sellerProfileRepository;
 
     public CustomerResponseDto createCustomProfile(CustomerRequestDto customerRequestDto) {
-        Customer customProfile = customerRepository.saveAndFlush(new Customer(customerRequestDto));
+        Customer customProfile = customerProfileRepository.saveAndFlush(new Customer(customerRequestDto));
         return new CustomerResponseDto(customProfile);
     }
 
     public CustomerResponseDto getProfileById(Long userId) {
-        Customer customer = customerRepository.findById(userId).orElseThrow(
+        Customer customer = customerProfileRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("해당 유저가 없습니다.")
         );
         return new CustomerResponseDto(customer);
