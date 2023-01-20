@@ -6,6 +6,7 @@ import com.sparta.shoppingmall.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,10 +47,11 @@ public class ProductController {
     */
     @GetMapping("/products")
     public List<ProductResponseDto> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
-                                      @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
+                                                 @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc,
+                                                 UserDetails userDetails) {
 
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
-        return productService.readProducts(page-1, size, sortBy, isAsc);
+        return productService.readProducts(page-1, size, sortBy, isAsc, userDetails);
     }
 
 }
