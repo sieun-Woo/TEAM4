@@ -3,12 +3,12 @@ package com.sparta.shoppingmall.service;
 import com.sparta.shoppingmall.dto.OrderRequestDto;
 import com.sparta.shoppingmall.dto.OrderResponseDto;
 import com.sparta.shoppingmall.entity.Order;
-import com.sparta.shoppingmall.entity.Product;
+
 import com.sparta.shoppingmall.entity.User;
 import com.sparta.shoppingmall.repository.OrderRepository;
 import com.sparta.shoppingmall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

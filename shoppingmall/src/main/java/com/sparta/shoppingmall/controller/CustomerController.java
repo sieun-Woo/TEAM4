@@ -1,21 +1,23 @@
 package com.sparta.shoppingmall.controller;
 
-import com.sparta.shoppingmall.dto.CustomerRequestDto;
-import com.sparta.shoppingmall.dto.CustomerResponseDto;
-import com.sparta.shoppingmall.dto.RegistrationRequestDto;
+import com.sparta.shoppingmall.dto.*;
 import com.sparta.shoppingmall.service.CustomerService;
 import com.sparta.shoppingmall.service.RegistrationService;
+import com.sparta.shoppingmall.service.ProductService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
+    private final ProductService productService;
     private final RegistrationService registrationService;
 
     // 구매자 프로필 설정
@@ -31,9 +33,30 @@ public class CustomerController {
 
     // 판매자 등록(판매자 프로필 설정)
     @PostMapping("/customer/registration")
-    public ResponseEntity<String> createSellerProfile(@RequestBody RegistrationRequestDto registrationRequestDto,
-                                                                      @AuthenticationPrincipal UserDetails userDetails) {
-        registrationService.createRegistration(registrationRequestDto, userDetails);
-        return new ResponseEntity<>("판매자 등록이 요청 되었습니다.", HttpStatus.OK);
+    public RegistrationResponseDto createSellerProfile(@RequestBody RegistrationRequestDto registrationRequestDto,
+                                                       @AuthenticationPrincipal UserDetails userDetails) {
+        return registrationService.createRegistration(registrationRequestDto, userDetails);
     }
+
+    @GetMapping("/sellers")
+    public List<RegistrationResponseDto> readSellers(@RequestParam("page") int page, @RequestParam("size") int size,
+                                                      @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
+
+        // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
+        return customerService.readSellers(page-1, size, sortBy, isAsc);
+    }
+
+    @GetMapping("/products")
+    public List<ProductResponseDto> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
+                                                 @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
+
+        // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
+        return productService.readProducts(page-1, size, sortBy, isAsc);
+    }
+
+    /*@GetMapping("/sellers")
+    public List<ProductResponseDto> allProducts(Pageable pageable){
+        return productService.findAll(pageable).get;
+    }*/
+
 }

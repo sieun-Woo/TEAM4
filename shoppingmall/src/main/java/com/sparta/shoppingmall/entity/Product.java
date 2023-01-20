@@ -35,6 +35,4 @@ public class Product extends Timestamped {
         this.price = productRequestDto.getPrice();
     }
 
-
-
 }
