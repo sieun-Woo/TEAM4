@@ -65,8 +65,6 @@ public class SellerService {
         String username = userDetails.getUsername();
         User user = userRepository.findByUsername(username).get();
         Registration registration = registrationRepository.findByUserId(user.getId()).get();
-        return new RegistrationResponseDto(registration.getId());
+        return new RegistrationResponseDto(registration);
     }
-
-
 }
