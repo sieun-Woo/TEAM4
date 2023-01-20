@@ -39,7 +39,7 @@ public class CustomerController {
     }
 
     @GetMapping("/sellers")
-    public List<SellerProfileResponseDto> readSellers(@RequestParam("page") int page, @RequestParam("size") int size,
+    public List<RegistrationResponseDto> readSellers(@RequestParam("page") int page, @RequestParam("size") int size,
                                                       @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
 
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.

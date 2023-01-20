@@ -73,9 +73,9 @@ public class ProductService {
     }
 
     private final ProductRequestDto productRequestDto;
-    public void findAll(Pageable pageable){
+    /*public void findAll(Pageable pageable){
         productRepository.findByUserOrderByIdDesc(createProduct(productRequestDto),pageable)
                 .map(ProductResponseDto::new);
-    }
+    }*/
 
 }
