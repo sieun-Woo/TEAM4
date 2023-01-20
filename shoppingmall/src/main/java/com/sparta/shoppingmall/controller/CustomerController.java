@@ -6,6 +6,7 @@ import com.sparta.shoppingmall.service.RegistrationService;
 import com.sparta.shoppingmall.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -33,8 +34,8 @@ public class CustomerController {
 
     // 판매자 등록(판매자 프로필 설정)
     @PostMapping("/customer/registration")
-    public RegistrationResponseDto createSellerProfile(@RequestBody RegistrationRequestDto registrationRequestDto,
-                                                       @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<String> createSellerProfile(@RequestBody RegistrationRequestDto registrationRequestDto,
+                                              @AuthenticationPrincipal UserDetails userDetails) {
         return registrationService.createRegistration(registrationRequestDto, userDetails);
     }
 
