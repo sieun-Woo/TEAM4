@@ -1,6 +1,8 @@
 package com.sparta.shoppingmall.controller;
 
-import com.sparta.shoppingmall.dto.CustomerResponseDto;
+import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
+import com.sparta.shoppingmall.dto.RegistrationRequestDto;
+import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.service.AdminServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,27 +23,27 @@ public class AdminController {
 
     //판매자 등록 요청 조회
     @GetMapping("/admin/seller-registrations")
-    public List<SellerRegistrationDto> getSellerRegistrationList() {
+    public List<RegistrationResponseDto> getSellerRegistrationList() {
         return adminServiceImpl.getSellerRegistrationList();
     }
 
     //판매자 등록 승인
     @PutMapping("/admin/seller-registration/{authId}")
-    public ResponseEntity<String> permitSellerRegister(@RequestBody SellerRegistrationDto sellerRegistrationDto){
-        adminServiceImpl.permitSellerRegister(sellerRegistrationDto);
+    public ResponseEntity<String> permitSellerRegister(@RequestBody RegistrationRequestDto registrationRequestDto, @PathVariable Long authId){
+        adminServiceImpl.permitSellerRegister(registrationRequestDto, authId);
         return new ResponseEntity<>("판매자 등록이 승인되었습니다.", HttpStatus.OK);
     }
 
     //고객 목록 조회`
     @GetMapping("/admin/customers")
-    public ResponseEntity<List<CustomerResponseDto>> getCustomerList(){
-        List<CustomerResponseDto> data = adminServiceImpl.getCustomerList();
+    public ResponseEntity<List<CustomerProfileResponseDto>> getCustomerList(){
+        List<CustomerProfileResponseDto> data = adminServiceImpl.getCustomerList();
         return ResponseEntity.status(200).body(data);
     }
 
     //판매자 목록 조회
     @GetMapping("/admin/sellers")
-    public List<SellerProfileResponseDto> getSellerList() {
+    public List<RegistrationResponseDto> getSellerList() {
         return adminServiceImpl.getSellerList();
     }
 
