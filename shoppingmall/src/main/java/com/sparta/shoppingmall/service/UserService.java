@@ -2,8 +2,11 @@ package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.SignInRequestDto;
 import com.sparta.shoppingmall.dto.SignUpRequestDto;
+import com.sparta.shoppingmall.dto.SignupResponseDto;
 import com.sparta.shoppingmall.entity.User;
 import com.sparta.shoppingmall.entity.UserRoleEnum;
+import com.sparta.shoppingmall.exception.CustomException;
+import com.sparta.shoppingmall.exception.ErrorCode;
 import com.sparta.shoppingmall.jwt.JwtUtil;
 import com.sparta.shoppingmall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +23,16 @@ public class UserService {
     private final JwtUtil jwtUtil;
 
     @Transactional
-    public void signUp(SignUpRequestDto signupRequestDto, UserRoleEnum role) {
+    public SignupResponseDto signUp(SignUpRequestDto signupRequestDto, UserRoleEnum role) {
 
         // 회원 중복 확인
         Optional<User> findUserId = userRepository.findByUsername(signupRequestDto.getUsername());
         if(findUserId.isPresent()){
-            throw new CustomException(DUPLICATE_USER);
+            throw new CustomException(ErrorCode.EXISTS_ID);
         }
         User user = new User(signupRequestDto.getUsername(), signupRequestDto.getPassword(), role);
         userRepository.save(user);
+        return new SignupResponseDto("200","회원가입 성공!");
     }
 
 
@@ -39,19 +43,17 @@ public class UserService {
 
         // 아이디 및 비밀먼호 확인
         User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new CustomException(MEMBER_NOT_FOUND)
+                () -> new CustomException(ErrorCode.ID_NOT_FOUND)
         );
 
         //로그인을 할 수 있는 사용자인지 확인을 한다.
-        if(!user.isUserStatus()){
-            throw new CustomException(MEMBER_IS_UNREGISTER);
-        }else {
+
             if (!user.getPassword().equals(password) ) {
-                throw new CustomException(INVALID_PASSWORD);
+                throw new CustomException(ErrorCode.PASSWORD_NOT_FOUND);
             } else {
                 return jwtUtil.createToken(user.getUsername(),user.getRole());
             }
-        }
+
     }
 
 }
