@@ -1,8 +1,12 @@
 package com.sparta.shoppingmall.controller;
 
 import com.sparta.shoppingmall.dto.SignInRequestDto;
+import com.sparta.shoppingmall.dto.SignInResponseDto;
 import com.sparta.shoppingmall.dto.SignUpRequestDto;
+import com.sparta.shoppingmall.dto.SignupResponseDto;
 import com.sparta.shoppingmall.entity.UserRoleEnum;
+import com.sparta.shoppingmall.exception.CustomException;
+import com.sparta.shoppingmall.exception.ErrorCode;
 import com.sparta.shoppingmall.jwt.JwtUtil;
 import com.sparta.shoppingmall.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,16 +31,16 @@ public class UserController {
     private static final String ADMIN_PASSWORD = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
     @PostMapping("/sign-up")
-    public ResponseEntity<ServerResponse> signUp(@RequestBody @Valid SignUpRequestDto signUpRequestDto, BindingResult bindingResult) {
+    public SignupResponseDto signUp(@RequestBody @Valid SignUpRequestDto signUpRequestDto, BindingResult bindingResult) {
         // 전달 받은 아이디와 패스워드가 요구되는 패턴과 일치하지 않는 경우 예외처리
         if (bindingResult.hasErrors() && bindingResult.getAllErrors().stream().findFirst().isPresent()) {
             ObjectError objectError = bindingResult.getAllErrors().stream().findFirst().get();
             String errorCode = Objects.requireNonNull(objectError.getCodes())[1].split("\\.")[1];
             System.out.println("Signup Pattern Error:" + errorCode);
             if (errorCode.equals("username")) {
-                throw new CustomException(INVALID_ID_PATTERN);
+                throw new CustomException(ErrorCode.ID_NOT_FOUND);
             } else if (errorCode.equals("password")) {
-                throw new CustomException(INVALID_PASSWORD_PATTERN);
+                throw new CustomException(ErrorCode.PASSWORD_NOT_FOUND);
             }
         }
 
@@ -45,30 +49,31 @@ public class UserController {
         if (signUpRequestDto.isAdmin()) {
             assert signUpRequestDto.getAdminPassword() != null;
             if (!signUpRequestDto.getAdminPassword().equals(ADMIN_PASSWORD)) {
-                throw new CustomException(INVALID_ADMIN_PASSWORD);
+                throw new CustomException(ErrorCode.INVALID_ADMIN_PASSWORD);
             }
             role = UserRoleEnum.ADMIN;
         }
 
-        userService.signUp(signUpRequestDto, role);
-        return ServerResponse.toResponseEntity(SUCCESS_SIGNUP);
+        return userService.signUp(signUpRequestDto, role);
+
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<ServerResponse> signIn(@RequestBody SignInRequestDto signInRequestDto, HttpServletResponse response) {
+    public SignInResponseDto signIn(@RequestBody SignInRequestDto signInRequestDto, HttpServletResponse response) {
         String username = signInRequestDto.getUsername();
         String password = signInRequestDto.getPassword();
 
+
         if (username == null || username.trim().equals("")) {
-            throw new CustomException(INVALID_SIGN_IN_ID);
+            throw new CustomException(ErrorCode.WRONG_ID);
         } else if (password == null || password.trim().equals("")) {
-            throw new CustomException(INVALID_SIGN_IN_PASSWORD);
+            throw new CustomException(ErrorCode.WRONG_PASSWORD);
         }
 
         // 사용자 id 및 비밀번호 확인
         String createToken = userService.signIn(signInRequestDto);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, createToken);
 
-        return ServerResponse.toResponseEntity(SUCCESS_SIGNIN);
+        return new SignInResponseDto("200","로그인 성공!");
     }
 }
