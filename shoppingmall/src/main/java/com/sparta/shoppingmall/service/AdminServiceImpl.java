@@ -1,7 +1,6 @@
 package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.CustomerProfileResponseDto;
-import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
 import com.sparta.shoppingmall.entity.CustomerProfile;
 import com.sparta.shoppingmall.repository.CustomerProfileRepository;
 import lombok.RequiredArgsConstructor;

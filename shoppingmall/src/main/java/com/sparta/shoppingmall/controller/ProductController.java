@@ -35,7 +35,7 @@ public class ProductController {
     }
 
     /*
-        상품 목록 조회하기
+        나의 판매 상품 목록 조회하기
         @RequestParam을 통해 페이징에 대한 정보를 클라이언트로부터 받습니다.
         page : 조회할 페이지
         size : 한 페이지에 들어가는 조회 목록 크기

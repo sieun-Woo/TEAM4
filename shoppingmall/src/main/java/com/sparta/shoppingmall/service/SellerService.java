@@ -1,16 +1,20 @@
 package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.OrderResponseDto;
-import com.sparta.shoppingmall.dto.ProductResponseDto;
+import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.entity.Order;
-import com.sparta.shoppingmall.entity.Product;
+import com.sparta.shoppingmall.entity.Registration;
+import com.sparta.shoppingmall.entity.User;
 import com.sparta.shoppingmall.repository.OrderRepository;
+import com.sparta.shoppingmall.repository.RegistrationRepository;
+import com.sparta.shoppingmall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +25,9 @@ import java.util.List;
 @Service
 public class SellerService {
 
+    private final UserRepository userRepository;
     private final OrderRepository orderRepository;
+    private final RegistrationRepository registrationRepository;
     public ResponseEntity<String> approveCustomerOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("해당하는 주문이 없습니다."));
         order.setOrderStatus();
@@ -32,6 +38,7 @@ public class SellerService {
 
     }
 
+    // 고객요청(주문) 목록 조회
     public List<OrderResponseDto> readOrders(int page, int size, String sortBy, boolean isAsc) {
         // 페이징 처리
         Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
@@ -47,4 +54,14 @@ public class SellerService {
 
         return orderResponseDtoArrayList;
     }
+
+    // 나의 판매자 프로필 조회
+    public RegistrationResponseDto readSellerProfile(UserDetails userDetails) {
+        String username = userDetails.getUsername();
+        User user = userRepository.findByUsername(username).get();
+        Registration registration = registrationRepository.findByUserId(user.getId()).get();
+        return new RegistrationResponseDto(registration.getId());
+    }
+
+
 }
