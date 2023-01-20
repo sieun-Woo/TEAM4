@@ -5,6 +5,7 @@ import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/seller/")
+@PreAuthorize("hasAnyRole('ROLE_SELLER')")
 public class SellerController {
 
     private final SellerService sellerService;
