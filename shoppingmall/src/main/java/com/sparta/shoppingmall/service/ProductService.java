@@ -1,5 +1,25 @@
 package com.sparta.shoppingmall.service;
 
+//import com.sparta.shoppingmall.dto.ProductRequestDto;
+//import com.sparta.shoppingmall.dto.ProductResponseDto;
+//import com.sparta.shoppingmall.entity.Product;
+//import com.sparta.shoppingmall.entity.User;
+//import com.sparta.shoppingmall.repository.ProductRepository;
+//import com.sparta.shoppingmall.repository.UserRepository;
+//import lombok.RequiredArgsConstructor;
+//import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.data.domain.Sort;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.stereotype.Service;
+//
+//import javax.transaction.Transactional;
+//import java.util.ArrayList;
+//import java.util.Iterator;
+//import java.util.List;
+
 import com.sparta.shoppingmall.dto.ProductRequestDto;
 import com.sparta.shoppingmall.dto.ProductResponseDto;
 import com.sparta.shoppingmall.entity.Product;
@@ -49,7 +69,7 @@ public class ProductService {
 
     // 상품 삭제하기
     @Transactional
-    public ResponseEntity deleteProduct(Long productId) {
+    public ResponseEntity<String> deleteProduct(Long productId) {
         // 등록된 id가 없다면 예외가 발생한다.
         productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException());
         productRepository.deleteById(productId);
@@ -76,5 +96,5 @@ public class ProductService {
 
         return productResponseDtoArrayList;
     }
-    
+
 }
