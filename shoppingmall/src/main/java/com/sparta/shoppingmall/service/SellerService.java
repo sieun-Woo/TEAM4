@@ -1,14 +1,13 @@
 package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.OrderResponseDto;
-import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
-import com.sparta.shoppingmall.entity.Customer;
+import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.entity.Order;
-import com.sparta.shoppingmall.entity.SellerProfile;
-import com.sparta.shoppingmall.repository.CustomerRepository;
+import com.sparta.shoppingmall.entity.Registration;
+import com.sparta.shoppingmall.entity.User;
 import com.sparta.shoppingmall.repository.OrderRepository;
 import com.sparta.shoppingmall.repository.RegistrationRepository;
-import com.sparta.shoppingmall.repository.SellerProfileRepository;
+import com.sparta.shoppingmall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,10 +25,8 @@ import java.util.List;
 @Service
 public class SellerService {
 
-    private final CustomerRepository customerRepository;
-
+    private final UserRepository userRepository;
     private final OrderRepository orderRepository;
-    private final SellerProfileRepository sellerProfileRepository;
     private final RegistrationRepository registrationRepository;
     public ResponseEntity<String> approveCustomerOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("해당하는 주문이 없습니다."));
@@ -58,19 +55,12 @@ public class SellerService {
         return orderResponseDtoArrayList;
     }
 
-
-    // 판매자 프로필 생성
-    public SellerProfileResponseDto createSellerProfile(UserDetails userDetails) {
-        Customer customer = customerRepository.findByUsername(userDetails.getUsername()).get();
-        registrationRepository.findByUserId(customer.getId());
-    }
-
-
     // 나의 판매자 프로필 조회
-    public SellerProfileResponseDto readSellerProfile(UserDetails userDetails) {
+    public RegistrationResponseDto readSellerProfile(UserDetails userDetails) {
         String username = userDetails.getUsername();
-        SellerProfile sellerProfile = sellerProfileRepository.findByUsername(username).get();
-        return new SellerProfileResponseDto(sellerProfile);
+        User user = userRepository.findByUsername(username).get();
+        Registration registration = registrationRepository.findByUserId(user.getId()).get();
+        return new RegistrationResponseDto(registration.getId());
     }
 
 

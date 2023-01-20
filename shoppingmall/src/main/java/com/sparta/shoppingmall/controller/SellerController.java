@@ -1,7 +1,7 @@
 package com.sparta.shoppingmall.controller;
 
 import com.sparta.shoppingmall.dto.OrderResponseDto;
-import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
+import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,15 +31,9 @@ public class SellerController {
         return sellerService.approveCustomerOrder(orderId);
     }
 
-//     나의 판매자 프로필 설정하기
-    @PostMapping("/profile")
-    public ResponseEntity createSellerProfile(@AuthenticationPrincipal UserDetails userDetails) {
-        sellerService.createSellerProfile();
-    }
-
     // 나의 판매자 프로필 조회
     @GetMapping("/profile")
-    public SellerProfileResponseDto readSellerProfile(@AuthenticationPrincipal UserDetails userDetails) {
+    public RegistrationResponseDto readSellerProfile(@AuthenticationPrincipal UserDetails userDetails) {
         return sellerService.readSellerProfile(userDetails);
     }
 }

@@ -1,7 +1,6 @@
 package com.sparta.shoppingmall.service;
 
 import com.sparta.shoppingmall.dto.CustomerResponseDto;
-import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.sparta.shoppingmall.controller;
 
 import com.sparta.shoppingmall.dto.CustomerResponseDto;
-import com.sparta.shoppingmall.dto.SellerProfileResponseDto;
 import com.sparta.shoppingmall.service.AdminServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
