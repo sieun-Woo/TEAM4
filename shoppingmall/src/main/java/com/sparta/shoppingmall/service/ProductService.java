@@ -50,8 +50,9 @@ public class ProductService {
 
     @Transactional
     // 상품 등록하기
-    public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
-        Product product = productRepository.saveAndFlush(new Product(productRequestDto));
+    public ProductResponseDto createProduct(ProductRequestDto productRequestDto, UserDetails userDetails) {
+        User user = userRepository.findByUsername(userDetails.getUsername()).get();
+        Product product = productRepository.saveAndFlush(new Product(productRequestDto, user));
         return new ProductResponseDto(product);
     }
 
@@ -76,7 +77,7 @@ public class ProductService {
         return new ResponseEntity("상품이 삭제 되었습니다.", HttpStatus.OK);
     }
 
-    // 상품 조회하기
+    // 나의 상품 조회하기
     @Transactional
     public List<ProductResponseDto> readProducts(int page, int size, String sortBy, boolean isAsc, UserDetails userDetails) {
         String username = userDetails.getUsername();
@@ -88,7 +89,7 @@ public class ProductService {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         // 현재 프론트을 사용하고 있지 않기 때문에 페이징 처리한 정보들을 리스트 형식을 반환하였다.
-        Iterator<Product> products = productRepository.findAllByUserId(user.getId(), pageable).getContent().iterator();
+        Iterator<Product> products = productRepository.findByUserId(user.getId(), pageable).getContent().iterator();
         ArrayList<ProductResponseDto> productResponseDtoArrayList = new ArrayList<>();
         while (products.hasNext()) {
             productResponseDtoArrayList.add(new ProductResponseDto(products.next()));

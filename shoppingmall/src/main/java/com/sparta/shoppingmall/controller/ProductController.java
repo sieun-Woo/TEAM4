@@ -6,6 +6,7 @@ import com.sparta.shoppingmall.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,9 @@ public class ProductController {
 
     // 상품 등록하기
     @PostMapping("/product")
-    public ProductResponseDto createProduct(@RequestBody ProductRequestDto productRequestDto) {
-        return productService.createProduct(productRequestDto);
+    public ProductResponseDto createProduct(@RequestBody ProductRequestDto productRequestDto,
+                                            @AuthenticationPrincipal UserDetails userDetails) {
+        return productService.createProduct(productRequestDto, userDetails);
     }
 
     // 상품 수정하기
@@ -48,7 +50,7 @@ public class ProductController {
     @GetMapping("/products")
     public List<ProductResponseDto> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
                                                  @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc,
-                                                 UserDetails userDetails) {
+                                                 @AuthenticationPrincipal UserDetails userDetails) {
 
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
         return productService.readProducts(page-1, size, sortBy, isAsc, userDetails);

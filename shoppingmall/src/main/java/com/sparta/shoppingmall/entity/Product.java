@@ -30,7 +30,8 @@ public class Product extends Timestamped {
     @JoinColumn(name="ORDER_ID")
     private Order order;
 
-    public Product(ProductRequestDto productRequestDto) {
+    public Product(ProductRequestDto productRequestDto, User user) {
+        this.user = user;
         this.name = productRequestDto.getName();
         this.price = productRequestDto.getPrice();
     }
