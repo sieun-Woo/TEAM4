@@ -39,6 +39,7 @@ public class CustomerController {
         return registrationService.createRegistration(registrationRequestDto, userDetails);
     }
 
+    // 판매자 목록 조회
     @GetMapping("/customer/sellers")
     public List<RegistrationResponseDto> readSellers(@RequestParam("page") int page, @RequestParam("size") int size,
                                                       @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc) {
@@ -47,13 +48,14 @@ public class CustomerController {
         return customerService.readSellers(page-1, size, sortBy, isAsc);
     }
 
+    // 전체 판매 상품 목록 조회
     @GetMapping("/products")
     public List<ProductResponseDto> readProducts(@RequestParam("page") int page, @RequestParam("size") int size,
-                                                 @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc,
-                                                 UserDetails userDetails) {
+                                                 @RequestParam("sortBy") String sortBy, @RequestParam("isAsc") boolean isAsc
+                                                 ) {
 
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
-        return productService.readProducts(page-1, size, sortBy, isAsc, userDetails);
+        return productService.readProducts(page-1, size, sortBy, isAsc);
     }
 
 }

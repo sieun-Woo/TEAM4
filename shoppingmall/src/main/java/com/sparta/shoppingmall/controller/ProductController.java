@@ -53,7 +53,7 @@ public class ProductController {
                                                  @AuthenticationPrincipal UserDetails userDetails) {
 
         // page 인덱스는 0부터 시작하기 때문에 page-1의 값을 인자로 하였다.
-        return productService.readProducts(page-1, size, sortBy, isAsc, userDetails);
+        return productService.myReadProducts(page-1, size, sortBy, isAsc, userDetails);
     }
 
 }

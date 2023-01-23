@@ -77,9 +77,9 @@ public class ProductService {
         return new ResponseEntity("상품이 삭제 되었습니다.", HttpStatus.OK);
     }
 
-    // 나의 상품 조회하기
+    // 나의 판매 상품 조회
     @Transactional
-    public List<ProductResponseDto> readProducts(int page, int size, String sortBy, boolean isAsc, UserDetails userDetails) {
+    public List<ProductResponseDto> myReadProducts(int page, int size, String sortBy, boolean isAsc, UserDetails userDetails) {
         String username = userDetails.getUsername();
         User user = userRepository.findByUsername(username).get();
 
@@ -98,4 +98,22 @@ public class ProductService {
         return productResponseDtoArrayList;
     }
 
+    // 전체 판매 상품 목록 조회
+    @Transactional
+    public List<ProductResponseDto> readProducts(int page, int size, String sortBy, boolean isAsc) {
+
+        // 페이징 처리
+        Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sort = Sort.by(direction, sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        // 현재 프론트을 사용하고 있지 않기 때문에 페이징 처리한 정보들을 리스트 형식을 반환하였다.
+        Iterator<Product> products = productRepository.findAll(pageable).getContent().iterator();
+        ArrayList<ProductResponseDto> productResponseDtoArrayList = new ArrayList<>();
+        while (products.hasNext()) {
+            productResponseDtoArrayList.add(new ProductResponseDto(products.next()));
+        }
+
+        return productResponseDtoArrayList;
+    }
 }
