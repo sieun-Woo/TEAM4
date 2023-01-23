@@ -10,18 +10,20 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Customer extends User{
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
+    @Column
+    private String username;
     @Column
     private String nickname;
     @Column
     private boolean isImageExist;
 
-    public Customer(CustomerRequestDto customerRequestDto) {
+    public Customer(CustomerRequestDto customerRequestDto, String username) {
+        this.username = username;
         this.nickname = customerRequestDto.getNickname();
         this.isImageExist = customerRequestDto.isImageExist();
     }

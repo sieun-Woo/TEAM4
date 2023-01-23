@@ -4,7 +4,6 @@ import com.sparta.shoppingmall.dto.CustomerRequestDto;
 import com.sparta.shoppingmall.dto.CustomerResponseDto;
 import com.sparta.shoppingmall.dto.RegistrationResponseDto;
 import com.sparta.shoppingmall.entity.Customer;
-import com.sparta.shoppingmall.entity.Registration;
 import com.sparta.shoppingmall.entity.User;
 import com.sparta.shoppingmall.repository.CustomerProfileRepository;
 import com.sparta.shoppingmall.repository.RegistrationRepository;
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +29,6 @@ public class CustomerService {
     private final RegistrationRepository registrationRepository;
     private final UserRepository userRepository;
     private final CustomerProfileRepository customerRepository;
-
-
     public CustomerResponseDto createCustomProfile(CustomerRequestDto customerRequestDto,UserDetails userDetails) {
         User user = userRepository.findByUsername(userDetails.getUsername()).get();
 
@@ -42,7 +38,7 @@ public class CustomerService {
         if (customerProfile.isPresent()) {
             throw new IllegalArgumentException("이미 요청하셨습니다.");
         }
-        Customer customProfile = customerProfileRepository.saveAndFlush(new Customer(customerRequestDto));
+        Customer customProfile = customerProfileRepository.saveAndFlush(new Customer(customerRequestDto, user.getUsername()));
         return new CustomerResponseDto(customProfile);
     }
 

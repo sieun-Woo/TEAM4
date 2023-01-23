@@ -27,7 +27,7 @@ public class CustomerController {
                                               @AuthenticationPrincipal UserDetails userDetails){
         return customerService.createCustomProfile(customerRequestDto,userDetails);
     }
-
+    // 고객 프로필 조회
     @GetMapping("/customer/profile")
     public CustomerResponseDto getProfileById(@AuthenticationPrincipal UserDetails userDetails){
         return customerService.getProfileById(userDetails);
