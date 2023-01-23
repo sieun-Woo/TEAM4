@@ -23,13 +23,14 @@ public class CustomerController {
 
     // 구매자 프로필 설정
     @PostMapping("/customer/profile")
-    public CustomerResponseDto createCustomer(@RequestBody CustomerRequestDto customerRequestDto){
-        return customerService.createCustomProfile(customerRequestDto);
+    public CustomerResponseDto createCustomer(@RequestBody CustomerRequestDto customerRequestDto,
+                                              @AuthenticationPrincipal UserDetails userDetails){
+        return customerService.createCustomProfile(customerRequestDto,userDetails);
     }
 
     @GetMapping("/customer/profile")
-    public CustomerResponseDto getProfileById(@PathVariable Long userId){
-        return customerService.getProfileById(userId);
+    public CustomerResponseDto getProfileById(@AuthenticationPrincipal UserDetails userDetails){
+        return customerService.getProfileById(userDetails);
     }
 
     // 판매자 등록(판매자 프로필 설정)
