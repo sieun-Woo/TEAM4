@@ -15,10 +15,10 @@ public class RegistrationResponseDto {
     private String intro;
 
     public RegistrationResponseDto(Registration registration) {
-        this.id = id;
-        this.nickName = nickName;
-        this.image = image;
-        this.intro = intro;
+        this.id = registration.getId();
+        this.nickName = registration.getNickName();
+        this.image = registration.getImage();
+        this.intro = registration.getIntro();
     }
 
     public RegistrationResponseDto(User user) {

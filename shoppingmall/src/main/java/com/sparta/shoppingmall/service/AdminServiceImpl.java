@@ -12,7 +12,6 @@ import com.sparta.shoppingmall.repository.RegistrationRepository;
 import com.sparta.shoppingmall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +50,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void permitSellerRegister(RegistrationRequestDto registrationRequestDto, Long id) {
-        Registration registration = registrationRepository.findByUserId(id).orElseThrow(
+        Registration registration = registrationRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 ID가 없습니다.")
         );
         Long userId = registration.getUserId();
@@ -59,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
                 () -> new IllegalArgumentException("해당 유저가 없습니다.")
         );
         user.customerToSeller();
-        List<RegistrationResponseDto> data =  getSellerList();
+//        List<RegistrationResponseDto> data =  getSellerList();
     }
 
     @Override
