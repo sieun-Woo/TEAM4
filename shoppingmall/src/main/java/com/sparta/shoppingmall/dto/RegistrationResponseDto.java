@@ -23,6 +23,9 @@ public class RegistrationResponseDto {
 
     public RegistrationResponseDto(User user) {
         this.id = user.getId();
+        this.nickName = user.getNickName();
+        this.image = user.getImage();
+        this.intro = user.getIntro();
     }
 
     public static RegistrationResponseDto add(Registration registration){

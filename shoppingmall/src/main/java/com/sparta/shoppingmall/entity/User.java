@@ -24,22 +24,37 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRoleEnum role;
+
     @Column(nullable = false)
     private boolean isUserStatus = true;
+
+    private String nickName = "";
+    private String image= "";
+    private String intro= "";
 
 
     public User(String username, String password, UserRoleEnum role) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.nickName = getNickName();
+        this.image = getImage();
+        this.intro = getIntro();
     }
 
     public void sellerToCustomer() {
         this.role = UserRoleEnum.CUSTOMER;
+        this.role = UserRoleEnum.SELLER;
+        this.nickName = getNickName();
+        this.intro = getIntro();
+        this.image = getImage();
     }
 
-    public void customerToSeller() {
+    public void customerToSeller(Registration registration) {
         this.role = UserRoleEnum.SELLER;
+        this.nickName = registration.getNickName();
+        this.intro = registration.getIntro();
+        this.image = registration.getImage();
     }
 }
 
