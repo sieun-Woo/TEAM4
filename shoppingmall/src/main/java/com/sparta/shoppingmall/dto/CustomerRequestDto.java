@@ -6,4 +6,5 @@ import lombok.Getter;
 public class CustomerRequestDto {
     private String nickname;
     private boolean imageExist;
+
 }
