@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface AdminService {
-    List<CustomerProfileResponseDto> getCustomerList(); //고객 목록 조회
+    List<RegistrationResponseDto> getCustomerList(); //고객 목록 조회
 
     List<RegistrationResponseDto> getSellerRegistrationList(); //판매자 등록 요청 조회
 

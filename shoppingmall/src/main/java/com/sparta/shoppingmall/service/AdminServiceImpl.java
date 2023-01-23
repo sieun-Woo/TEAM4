@@ -25,17 +25,15 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AdminServiceImpl implements AdminService {
 
-    private final CustomerProfileRepository customerProfileRepository;
+//    private final CustomerProfileRepository customerProfileRepository;
     private final RegistrationRepository registrationRepository;
     private final UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public List<CustomerProfileResponseDto> getCustomerList() {
-        List<Customer> customerList = customerProfileRepository.findAll();
-        List<CustomerProfileResponseDto> resultDto = new ArrayList<>();
-        customerList.forEach(customer -> resultDto.add(CustomerProfileResponseDto.add(customer)));
-        return resultDto;
+    public List<RegistrationResponseDto> getCustomerList() {
+        Optional<User> customerList = userRepository.findAllByRole(UserRoleEnum.CUSTOMER);
+        return customerList.stream().map(RegistrationResponseDto::new).collect(Collectors.toList());
     }
 
     @Override
@@ -47,6 +45,7 @@ public class AdminServiceImpl implements AdminService {
         return resultDto;
     }
 
+    //판매자 등록 요청 승인
     @Override
     @Transactional
     public void permitSellerRegister(RegistrationRequestDto registrationRequestDto, Long id) {
@@ -61,6 +60,7 @@ public class AdminServiceImpl implements AdminService {
 //        List<RegistrationResponseDto> data =  getSellerList();
     }
 
+    //판매자 목록 조회
     @Override
     @Transactional
     public List<RegistrationResponseDto> getSellerList() {
@@ -69,6 +69,7 @@ public class AdminServiceImpl implements AdminService {
         return sellerList.stream().map(RegistrationResponseDto::new).collect(Collectors.toList());
     }
 
+    //판매자 권한 삭제
     @Override
     @Transactional
     public void deleteSellerRegistration(Long authId) {

@@ -36,9 +36,9 @@ public class AdminController {
 
     //고객 목록 조회`
     @GetMapping("/admin/customers")
-    public ResponseEntity<List<CustomerProfileResponseDto>> getCustomerList(){
-        List<CustomerProfileResponseDto> data = adminServiceImpl.getCustomerList();
-        return ResponseEntity.status(200).body(data);
+    public List<RegistrationResponseDto> getCustomerList(){
+        List<RegistrationResponseDto> data = adminServiceImpl.getCustomerList();
+        return data;
     }
 
     //판매자 목록 조회
