@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Registration {
 
+    private String userName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +23,9 @@ public class Registration {
     private String image;
     private String intro;
 
-    public Registration(RegistrationRequestDto registrationRequestDto, Long id){
-        this.userId = id;
+    public Registration(RegistrationRequestDto registrationRequestDto, User user) {
+        this.userId = user.getId();
+        this.userName = user.getUsername();
         this.nickName = registrationRequestDto.getNickName();
         this.image = registrationRequestDto.getImage();
         this.intro = registrationRequestDto.getIntro();

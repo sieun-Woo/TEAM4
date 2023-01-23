@@ -31,7 +31,7 @@ public class RegistrationService {
             throw new IllegalArgumentException("이미 요청하셨습니다.");
         }
         
-        registrationRepository.saveAndFlush(new Registration(registrationRequestDto, user.getId()));
+        registrationRepository.saveAndFlush(new Registration(registrationRequestDto, user));
 
         return new ResponseEntity<>("판매자 등록이 요청되었습니다.", HttpStatus.OK);
     }

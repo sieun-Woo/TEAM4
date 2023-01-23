@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,11 +30,20 @@ public class AdminServiceImpl implements AdminService {
     private final RegistrationRepository registrationRepository;
     private final UserRepository userRepository;
 
+    //고객 목록 조회
     @Override
     @Transactional(readOnly = true)
     public List<RegistrationResponseDto> getCustomerList() {
-        Optional<User> customerList = userRepository.findAllByRole(UserRoleEnum.CUSTOMER);
+        List<User> customerList = userRepository.findAllByRole(UserRoleEnum.CUSTOMER);
         return customerList.stream().map(RegistrationResponseDto::new).collect(Collectors.toList());
+    }
+
+    //판매자 목록 조회
+    @Override
+    @Transactional
+    public List<RegistrationResponseDto> getSellerList() {
+        List<User> sellerList = userRepository.findAllByRole(UserRoleEnum.SELLER);
+        return sellerList.stream().map(RegistrationResponseDto::new).collect(Collectors.toList());
     }
 
     @Override
@@ -60,14 +70,7 @@ public class AdminServiceImpl implements AdminService {
 //        List<RegistrationResponseDto> data =  getSellerList();
     }
 
-    //판매자 목록 조회
-    @Override
-    @Transactional
-    public List<RegistrationResponseDto> getSellerList() {
 
-        Optional<User> sellerList = userRepository.findAllByRole(UserRoleEnum.SELLER);
-        return sellerList.stream().map(RegistrationResponseDto::new).collect(Collectors.toList());
-    }
 
     //판매자 권한 삭제
     @Override
