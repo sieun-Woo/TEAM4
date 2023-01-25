@@ -46,21 +46,23 @@ public class Order extends Timestamped{
 
 
 
-    public Order(User user,OrderRequestDto orderRequestDto) {
-        List<Product> orderProducts = new ArrayList<>();
-        for (Product orderProduct : orderProducts) {
-            orderProducts.add(orderProduct);
-        }
+    public Order(User user, OrderRequestDto orderRequestDto, List<Product> productList) {
+
+
+
+//        List<Product> orderProducts = new ArrayList<>();
+//        for (Product orderProduct : orderProducts) {
+//            orderProducts.add(orderProduct);
+//        }
         this.user = user;
-        this.orderProducts = orderProducts;
-        this.price = getTotalPrice(orderProducts);
+        this.orderProducts = productList;
+        this.price = getTotalPrice(productList);
         this.requireComment = orderRequestDto.getRequireComment();
         this.addressee = orderRequestDto.getAddressee();
         this.address = orderRequestDto.getAddress();
         this.phone = orderRequestDto.getPhone();
         this.orderStatus =false;
     }
-
 
 
     public int getTotalPrice(List<Product> orderProducts) {

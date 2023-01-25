@@ -25,9 +25,6 @@ public class User {
     @Column(nullable = false)
     private UserRoleEnum role;
 
-    @Column(nullable = false)
-    private boolean isUserStatus = true;
-
     private String nickName = "";
     private String image= "";
     private String intro= "";
