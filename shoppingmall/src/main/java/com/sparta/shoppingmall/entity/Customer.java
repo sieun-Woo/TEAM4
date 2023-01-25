@@ -25,12 +25,12 @@ public class Customer {
     public Customer(CustomerRequestDto customerRequestDto, String username) {
         this.username = username;
         this.nickname = customerRequestDto.getNickname();
-        this.isImageExist = customerRequestDto.isImageExist();
+        this.isImageExist = customerRequestDto.getIsImageExist();
     }
 
     // 수정 기능 구현 시
     public void update(CustomerRequestDto customerRequestDto) {
         this.nickname =customerRequestDto.getNickname();
-        this.isImageExist = customerRequestDto.isImageExist();
+        this.isImageExist = customerRequestDto.getIsImageExist();
     }
 }
